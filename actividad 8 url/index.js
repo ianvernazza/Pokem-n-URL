@@ -1,7 +1,7 @@
 const container = document.getElementById('pokemon-container');
 
 document.getElementById('fetch-pokemons').addEventListener('click', async () => {
-    container.innerHTML = ''; // Limpiar el contenedor
+    container.innerHTML = '';
 
     const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=50');
     const data = await response.json();
@@ -13,17 +13,17 @@ document.getElementById('fetch-pokemons').addEventListener('click', async () => 
     }
 });
 
-// Evento para buscar Pokémon por nombre
+
 document.getElementById('search-pokemon').addEventListener('click', async () => {
     const name = document.getElementById('pokemon-name').value.toLowerCase();
-    container.innerHTML = ''; // Limpiar el contenedor
+    container.innerHTML = '';
 
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
         if (!response.ok) throw new Error('Pokémon no encontrado');
         const pokemonDetails = await response.json();
         
-        // Obtener la descripción del Pokémon
+        
         const speciesResponse = await fetch(pokemonDetails.species.url);
         const speciesDetails = await speciesResponse.json();
         const description = getDescription(speciesDetails.flavor_text_entries);
@@ -34,10 +34,10 @@ document.getElementById('search-pokemon').addEventListener('click', async () => 
     }
 });
 
-// Evento para buscar Pokémon que comienzan con una letra
+
 document.getElementById('search-letter').addEventListener('click', async () => {
     const letter = document.getElementById('pokemon-letter').value.toLowerCase();
-    container.innerHTML = ''; // Limpiar el contenedor
+    container.innerHTML = '';
 
     const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=50');
     const data = await response.json();
@@ -55,7 +55,7 @@ function displayPokemon(pokemon, description) {
     const card = document.createElement('div');
     card.className = 'pokemon-card';
 
-    // Obtener los tipos y traducir a español
+    
     const types = pokemon.types.map(typeInfo => translateType(typeInfo.type.name)).join(', ');
 
     card.innerHTML = `
@@ -70,7 +70,7 @@ function displayPokemon(pokemon, description) {
 }
 
 function getDescription(flavorTextEntries) {
-    // Filtrar para obtener la primera descripción en español
+    
     const entry = flavorTextEntries.find(entry => entry.language.name === 'es');
     return entry ? entry.flavor_text.replace(/\n/g, ' ') : 'Descripción no disponible.';
 }
