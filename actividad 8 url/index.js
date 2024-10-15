@@ -96,5 +96,5 @@ function translateType(type) {
         "steel": "Acero",
         "fairy": "Hada"
     };
-    return translations[type] || type; // Devuelve el tipo en español o el original si no hay traducción
+    return translations[type] || type;
 }
